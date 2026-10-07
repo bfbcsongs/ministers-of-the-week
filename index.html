@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#07111f">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <title>Ministers of the Week</title>
 
@@ -25,22 +24,20 @@ html,body{
 
 body{
   background:
-    radial-gradient(circle at 15% 10%,rgba(255,255,255,.10),transparent 25%),
-    radial-gradient(circle at 85% 20%,rgba(251,191,36,.10),transparent 25%),
-    linear-gradient(145deg,#07111f,#101b35 48%,#07111f);
-  color:#111827;
+    radial-gradient(circle at 20% 10%,rgba(45,212,191,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(139,92,246,.20),transparent 30%),
+    linear-gradient(145deg,#06101d,#0b1b30 55%,#111827);
+  color:#fff;
   overflow-x:hidden;
 }
 
-/* =========================
-   FLOATING LIGHTS
-========================= */
+/* ---------- FLOATING LIGHTS ---------- */
 
 .lights{
   position:fixed;
   inset:0;
-  pointer-events:none;
   overflow:hidden;
+  pointer-events:none;
   z-index:0;
 }
 
@@ -51,489 +48,381 @@ body{
   border-radius:50%;
   background:#fff;
   box-shadow:
-    0 0 5px #fff,
-    0 0 12px rgba(255,255,255,.9);
-  animation:twinkle 2.5s infinite ease-in-out;
-  opacity:.25;
+    0 0 8px #fff,
+    0 0 16px rgba(255,255,255,.8);
+  animation:
+    floatLight linear infinite,
+    twinkle ease-in-out infinite;
 }
 
-.light:nth-child(1){left:8%;top:12%;animation-delay:.2s}
-.light:nth-child(2){left:21%;top:34%;animation-delay:1.1s}
-.light:nth-child(3){left:38%;top:8%;animation-delay:.6s}
-.light:nth-child(4){left:56%;top:27%;animation-delay:1.8s}
-.light:nth-child(5){left:72%;top:13%;animation-delay:.4s}
-.light:nth-child(6){left:88%;top:38%;animation-delay:1.4s}
-.light:nth-child(7){left:12%;top:68%;animation-delay:1.7s}
-.light:nth-child(8){left:31%;top:82%;animation-delay:.8s}
-.light:nth-child(9){left:66%;top:72%;animation-delay:2s}
-.light:nth-child(10){left:91%;top:84%;animation-delay:.9s}
+.light:nth-child(1){left:8%;top:18%;animation-duration:9s,2s}
+.light:nth-child(2){left:22%;top:72%;animation-duration:13s,3s}
+.light:nth-child(3){left:38%;top:28%;animation-duration:11s,2.5s}
+.light:nth-child(4){left:55%;top:80%;animation-duration:15s,3.2s}
+.light:nth-child(5){left:72%;top:15%;animation-duration:10s,2.2s}
+.light:nth-child(6){left:88%;top:60%;animation-duration:14s,2.8s}
+.light:nth-child(7){left:15%;top:45%;animation-duration:12s,3.5s}
+.light:nth-child(8){left:64%;top:48%;animation-duration:9s,2.4s}
+.light:nth-child(9){left:94%;top:30%;animation-duration:16s,3s}
+.light:nth-child(10){left:45%;top:10%;animation-duration:12s,2s}
+
+@keyframes floatLight{
+  0%{transform:translateY(30px)}
+  50%{transform:translateY(-40px)}
+  100%{transform:translateY(30px)}
+}
 
 @keyframes twinkle{
-  0%,100%{
-    opacity:.15;
-    transform:scale(.7);
-  }
-  50%{
-    opacity:1;
-    transform:scale(1.7);
-  }
+  0%,100%{opacity:.2;transform:scale(.7)}
+  50%{opacity:1;transform:scale(1.4)}
 }
 
-/* =========================
-   APP
-========================= */
+/* ---------- APP ---------- */
 
 .app{
   position:relative;
   z-index:1;
-  max-width:520px;
+  width:min(100%,540px);
   margin:auto;
-  padding-bottom:24px;
+  padding:12px;
 }
 
-/* =========================
-   HERO
-========================= */
+/* ---------- HERO ---------- */
 
 .hero{
   position:relative;
-  margin:10px;
-  padding:24px 15px 20px;
-  border-radius:20px;
-  text-align:center;
-  color:white;
   overflow:hidden;
-
+  border-radius:25px;
+  padding:24px 16px 20px;
+  text-align:center;
   background:
-    linear-gradient(
-      135deg,
-      rgba(15,23,42,.97),
-      rgba(30,41,59,.96)
-    );
-
+    linear-gradient(145deg,
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.035));
   border:1px solid rgba(255,255,255,.14);
-
   box-shadow:
-    0 10px 35px rgba(0,0,0,.35),
-    inset 0 0 30px rgba(255,255,255,.03);
+    0 15px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.10);
+  backdrop-filter:blur(12px);
 }
 
 .hero:before{
   content:"";
   position:absolute;
-  width:180px;
-  height:180px;
+  width:220px;
+  height:220px;
+  left:-80px;
+  top:-100px;
   border-radius:50%;
-  top:-110px;
-  left:-70px;
-  background:rgba(251,191,36,.13);
-  filter:blur(10px);
+  background:rgba(56,189,248,.18);
+  filter:blur(35px);
+  animation:pulseGlow 4s ease-in-out infinite;
 }
 
 .hero:after{
   content:"";
   position:absolute;
-  width:180px;
-  height:180px;
+  width:200px;
+  height:200px;
+  right:-80px;
+  bottom:-100px;
   border-radius:50%;
-  right:-90px;
-  bottom:-110px;
-  background:rgba(59,130,246,.15);
-  filter:blur(12px);
+  background:rgba(168,85,247,.18);
+  filter:blur(35px);
+  animation:pulseGlow 5s ease-in-out infinite reverse;
 }
 
-.sparkle{
-  position:absolute;
-  font-size:18px;
-  animation:sparkle 2.2s infinite ease-in-out;
+@keyframes pulseGlow{
+  0%,100%{opacity:.45;transform:scale(.9)}
+  50%{opacity:1;transform:scale(1.15)}
 }
 
-.sparkle.s1{
-  left:18px;
-  top:15px;
-}
-
-.sparkle.s2{
-  right:20px;
-  top:26px;
-  animation-delay:1s;
-}
-
-.sparkle.s3{
-  left:35px;
-  bottom:18px;
-  animation-delay:.5s;
-}
-
-.sparkle.s4{
-  right:38px;
-  bottom:15px;
-  animation-delay:1.4s;
-}
-
-@keyframes sparkle{
-  0%,100%{
-    opacity:.3;
-    transform:scale(.75) rotate(0);
-  }
-
-  50%{
-    opacity:1;
-    transform:scale(1.25) rotate(20deg);
-  }
-}
-
-.hero-small{
+.church{
   position:relative;
   z-index:2;
   font-size:11px;
-  letter-spacing:3px;
-  font-weight:800;
-  color:#fbbf24;
-  margin-bottom:7px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fcd34d;
 }
 
 .hero-title{
   position:relative;
   z-index:2;
-  font-size:26px;
+  margin:8px 0 3px;
+  font-size:28px;
+  line-height:1.05;
   font-weight:1000;
-  letter-spacing:.7px;
+  letter-spacing:.5px;
   text-shadow:
-    0 0 12px rgba(255,255,255,.18);
+    0 0 8px rgba(255,255,255,.35),
+    0 0 25px rgba(56,189,248,.25);
+  animation:titleGlow 3s ease-in-out infinite;
 }
 
-.hero-sub{
-  position:relative;
-  z-index:2;
-  margin-top:7px;
-  font-size:13px;
-  color:#dbeafe;
-  line-height:1.4;
+@keyframes titleGlow{
+  0%,100%{text-shadow:0 0 8px rgba(255,255,255,.25)}
+  50%{text-shadow:
+    0 0 10px rgba(255,255,255,.55),
+    0 0 30px rgba(56,189,248,.45)}
 }
 
-.hero-date{
+.subtitle{
   position:relative;
   z-index:2;
-  display:inline-block;
-  margin-top:13px;
-  padding:7px 13px;
-  border-radius:30px;
-  background:rgba(251,191,36,.13);
-  border:1px solid rgba(251,191,36,.35);
+  font-size:12px;
+  color:#cbd5e1;
+}
+
+.sparkles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+}
+
+.sparkles span{
+  position:absolute;
   color:#fde68a;
-  font-size:13px;
-  font-weight:900;
+  font-size:18px;
+  animation:sparkle 2.5s ease-in-out infinite;
 }
 
-/* =========================
-   DATE
-========================= */
+.sparkles span:nth-child(1){left:7%;top:20%}
+.sparkles span:nth-child(2){right:9%;top:25%;animation-delay:.7s}
+.sparkles span:nth-child(3){left:15%;bottom:15%;animation-delay:1.2s}
+.sparkles span:nth-child(4){right:15%;bottom:14%;animation-delay:1.7s}
+
+@keyframes sparkle{
+  0%,100%{opacity:.2;transform:scale(.6) rotate(0)}
+  50%{opacity:1;transform:scale(1.25) rotate(45deg)}
+}
+
+/* ---------- DATE ---------- */
 
 .date-box{
-  margin:0 10px 9px;
+  margin:12px 0;
+  padding:10px;
+  border-radius:16px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.10);
 }
 
-.date-input{
-  width:100%;
-  height:42px;
-  border:0;
-  outline:none;
-  border-radius:11px;
-  background:white;
-  padding:0 12px;
-  font-size:16px;
-  font-weight:800;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
-}
-
-/* =========================
-   TABLE CARD
-========================= */
-
-.table-card{
-  margin:0 10px;
-  padding:7px;
-  border-radius:17px;
-  background:rgba(255,255,255,.94);
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.25);
-  overflow:hidden;
-}
-
-/* GROUP */
-.group{
-  position:relative;
-  margin:2px 0 5px;
-  padding:9px 11px;
-  border-radius:9px;
-  color:white;
-  font-size:12px;
-  font-weight:1000;
-  letter-spacing:1px;
-  overflow:hidden;
-}
-
-.group:after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:60%;
-  height:100%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.25),
-    transparent
-  );
-  animation:shine 4s infinite;
-}
-
-@keyframes shine{
-  0%{left:-100%}
-  30%,100%{left:150%}
-}
-
-.group.worship{
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
-}
-
-.group.singers{
-  background:linear-gradient(135deg,#7c3aed,#5b21b6);
-}
-
-.group.instruments{
-  background:linear-gradient(135deg,#059669,#047857);
-}
-
-/* ROW */
-.row{
-  display:grid;
-  grid-template-columns:43% 57%;
-  min-height:49px;
-  margin-bottom:3px;
-  border-radius:9px;
-  overflow:hidden;
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-}
-
-.row:nth-child(even){
-  background:#f1f5f9;
-}
-
-.position{
-  display:flex;
-  align-items:center;
-  padding:7px 8px;
-  font-size:13px;
+.date-box label{
+  display:block;
+  font-size:10px;
   font-weight:900;
-  color:#334155;
+  letter-spacing:1px;
+  color:#cbd5e1;
+  margin-bottom:5px;
 }
 
-.name-wrap{
-  display:flex;
-  align-items:center;
-  background:white;
-  padding:3px;
-}
-
-.name-input{
+input{
   width:100%;
-  height:40px;
   border:0;
-  outline:none;
-  background:transparent;
-  padding:0 8px;
+  outline:0;
+  border-radius:11px;
+  padding:12px;
   font-size:16px;
   font-weight:800;
+  background:#fff;
   color:#111827;
 }
 
-.name-input::placeholder{
-  color:#94a3b8;
-  font-weight:600;
+/* ---------- TABLE CARD ---------- */
+
+.table-card{
+  margin-top:12px;
+  padding:10px;
+  border-radius:24px;
+  background:rgba(255,255,255,.065);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
 
-.name-input:focus{
-  background:#fffbeb;
-  border-radius:7px;
+.group{
+  margin-bottom:10px;
+  overflow:hidden;
+  border-radius:16px;
+  background:rgba(255,255,255,.045);
 }
 
-.vacant{
-  color:#94a3b8;
-  font-style:italic;
+.group:last-child{
+  margin-bottom:0;
+}
+
+.group-title{
+  padding:10px 12px;
   font-size:12px;
+  font-weight:1000;
+  letter-spacing:1px;
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+.worship .group-title{
+  background:linear-gradient(90deg,#075985,#0e7490);
+}
+
+.backup .group-title{
+  background:linear-gradient(90deg,#6d28d9,#7c3aed);
+}
+
+.instrument .group-title{
+  background:linear-gradient(90deg,#047857,#059669);
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1.15fr;
+  align-items:center;
+  min-height:50px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.position{
+  padding:8px 10px;
+  font-size:13px;
+  font-weight:800;
+  color:#dbeafe;
+}
+
+.row input{
+  width:calc(100% - 10px);
+  margin-right:10px;
+  padding:9px 10px;
+  font-size:14px;
+  background:rgba(255,255,255,.93);
+}
+
+/* ---------- BUTTONS ---------- */
 
 .actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin:10px;
+  margin-top:12px;
 }
 
 button{
-  min-height:46px;
   border:0;
-  border-radius:11px;
-  font-size:14px;
-  font-weight:1000;
+  outline:0;
   cursor:pointer;
+  border-radius:15px;
+  padding:13px 8px;
+  font-size:12px;
+  font-weight:1000;
+  color:#fff;
+  box-shadow:0 5px 14px rgba(0,0,0,.25);
   transition:.15s;
 }
 
 button:active{
-  transform:scale(.97);
+  transform:scale(.96);
 }
 
 .save{
-  color:white;
-  background:linear-gradient(135deg,#059669,#047857);
-  box-shadow:0 5px 15px rgba(5,150,105,.25);
+  background:linear-gradient(135deg,#059669,#10b981);
 }
 
 .clear{
-  color:white;
-  background:linear-gradient(135deg,#ef4444,#b91c1c);
+  background:linear-gradient(135deg,#475569,#334155);
 }
 
 .preview-btn{
   grid-column:1/-1;
-  color:white;
-  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  background:linear-gradient(135deg,#f59e0b,#f97316);
+  font-size:14px;
+  padding:15px;
 }
 
-/* =========================
-   PREVIEW
-========================= */
+/* ---------- PREVIEW ---------- */
 
 .preview{
   display:none;
-  margin:10px;
-  border-radius:17px;
-  overflow:hidden;
-  background:white;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  margin-top:14px;
+  padding:12px;
+  border-radius:22px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
 }
 
-.preview-head{
-  padding:18px 12px;
-  text-align:center;
-  color:white;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(251,191,36,.2),transparent 30%),
-    linear-gradient(135deg,#0f172a,#1e3a5f);
+.preview.show{
+  display:block;
 }
 
 .preview-title{
-  font-size:20px;
+  text-align:center;
   font-weight:1000;
+  margin-bottom:9px;
 }
 
-.preview-date{
-  margin-top:5px;
-  color:#fde68a;
-  font-size:13px;
-  font-weight:800;
-}
-
-.preview-body{
-  padding:8px;
-}
-
-.preview-line{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:9px 6px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:13px;
-}
-
-.preview-position{
-  font-weight:900;
-  color:#334155;
-}
-
-.preview-name{
-  font-weight:800;
-  text-align:right;
-}
-
-.preview-name.vacant{
-  color:#94a3b8;
-  font-style:italic;
+#cardPreview{
+  width:100%;
+  display:block;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
 .preview-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  padding:9px;
+  margin-top:10px;
 }
 
-.edit{
-  color:white;
-  background:#64748b;
+.edit-btn{
+  background:#475569;
 }
 
-.post{
-  color:white;
-  background:#1877f2;
+.post-btn{
+  background:linear-gradient(135deg,#0084ff,#0064d8);
 }
 
-/* =========================
-   STATUS
-========================= */
-
-.status{
-  display:none;
-  margin:10px;
-  padding:10px;
-  border-radius:9px;
-  text-align:center;
-  font-size:13px;
-  font-weight:900;
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* ---------- FOOTER ---------- */
 
 .footer{
   text-align:center;
-  padding:12px 10px 5px;
-  color:rgba(255,255,255,.65);
+  padding:18px 5px 8px;
   font-size:10px;
-  letter-spacing:.5px;
+  color:#94a3b8;
 }
 
-@media(max-width:360px){
+/* ---------- TOAST ---------- */
 
-  .hero-title{
-    font-size:22px;
-  }
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translate(-50%,20px);
+  background:#111827;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:100;
+  white-space:nowrap;
+}
 
-  .position{
-    font-size:12px;
-  }
-
-  .name-input{
-    font-size:14px;
-  }
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
 }
 </style>
 </head>
 
 <body>
 
-<!-- FLOATING LIGHTS -->
 <div class="lights">
   <span class="light"></span>
   <span class="light"></span>
@@ -549,388 +438,199 @@ button:active{
 
 <div class="app">
 
-  <!-- HERO -->
-  <section class="hero">
+  <div class="hero">
 
-    <div class="sparkle s1">✦</div>
-    <div class="sparkle s2">✧</div>
-    <div class="sparkle s3">✦</div>
-    <div class="sparkle s4">✧</div>
+    <div class="sparkles">
+      <span>✦</span>
+      <span>✧</span>
+      <span>✦</span>
+      <span>✧</span>
+    </div>
 
-    <div class="hero-small">
+    <div class="church">
       BURGOS FAMILY BAPTIST CHURCH
     </div>
 
     <div class="hero-title">
-      MINISTERS OF THE WEEK
+      ✨ MINISTERS OF THE WEEK ✨
     </div>
 
-    <div class="hero-sub">
-      Serving together • Worshipping together •
-      Glorifying God together
+    <div class="subtitle">
+      Serving together • Worshipping together
     </div>
 
-    <div id="heroDate" class="hero-date">
-      This Week
-    </div>
-
-  </section>
-
-  <!-- DATE -->
-  <div class="date-box">
-    <input
-      id="weekDate"
-      class="date-input"
-      type="date">
   </div>
 
-  <!-- TABLE -->
-  <section class="table-card">
+  <div class="date-box">
+    <label>DATE / WEEK</label>
+    <input type="date" id="weekDate">
+  </div>
+
+  <div class="table-card">
+
+    <!-- WORSHIP -->
 
     <div class="group worship">
-      ✦ WORSHIP TEAM
-    </div>
 
-    <div class="row">
-      <div class="position">
-        Worship Leader
+      <div class="group-title">
+        🎤 WORSHIP TEAM
       </div>
 
-      <div class="name-wrap">
-        <input
-          id="worshipLeader"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">Worship Leader</div>
+        <input id="worshipLeader" placeholder="Type name">
       </div>
+
     </div>
 
+    <!-- BACKUP -->
 
-    <div class="group singers">
-      ✦ BACK UP SINGERS
-    </div>
+    <div class="group backup">
 
-    <div class="row">
-      <div class="position">1. Singer</div>
-
-      <div class="name-wrap">
-        <input
-          id="backup1"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="group-title">
+        🎶 BACK UP SINGERS
       </div>
-    </div>
 
-    <div class="row">
-      <div class="position">2. Singer</div>
-
-      <div class="name-wrap">
-        <input
-          id="backup2"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">1.</div>
+        <input id="backup1" placeholder="Type name">
       </div>
-    </div>
 
-    <div class="row">
-      <div class="position">3. Singer</div>
-
-      <div class="name-wrap">
-        <input
-          id="backup3"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">2.</div>
+        <input id="backup2" placeholder="Type name">
       </div>
-    </div>
 
-
-    <div class="group instruments">
-      ✦ INSTRUMENTALISTS
-    </div>
-
-    <div class="row">
-      <div class="position">Lead Guitar</div>
-
-      <div class="name-wrap">
-        <input
-          id="leadGuitar"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">3.</div>
+        <input id="backup3" placeholder="Type name">
       </div>
+
     </div>
 
-    <div class="row">
-      <div class="position">Bass Guitar</div>
+    <!-- INSTRUMENTS -->
 
-      <div class="name-wrap">
-        <input
-          id="bassGuitar"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+    <div class="group instrument">
+
+      <div class="group-title">
+        🎸 INSTRUMENTALISTS
       </div>
-    </div>
 
-    <div class="row">
-      <div class="position">Keyboard</div>
-
-      <div class="name-wrap">
-        <input
-          id="keyboard"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">Lead Guitar</div>
+        <input id="leadGuitar" placeholder="Type name">
       </div>
-    </div>
 
-    <div class="row">
-      <div class="position">Drummer</div>
-
-      <div class="name-wrap">
-        <input
-          id="drummer"
-          class="name-input"
-          placeholder="Enter name"
-          autocomplete="off">
+      <div class="row">
+        <div class="position">Bass Guitar</div>
+        <input id="bassGuitar" placeholder="Type name">
       </div>
+
+      <div class="row">
+        <div class="position">Keyboard</div>
+        <input id="keyboard" placeholder="Type name">
+      </div>
+
+      <div class="row">
+        <div class="position">Drummer</div>
+        <input id="drummer" placeholder="Type name">
+      </div>
+
     </div>
-
-  </section>
-
-
-  <!-- ACTIONS -->
-  <div class="actions">
-
-    <button class="save"
-            onclick="saveMinisters()">
-      ✓ SAVE
-    </button>
-
-    <button class="clear"
-            onclick="clearForm()">
-      CLEAR
-    </button>
-
-    <button class="preview-btn"
-            onclick="showPreview()">
-      👁 PREVIEW &amp; POST
-    </button>
 
   </div>
 
+  <div class="actions">
+    <button class="save" onclick="saveData()">💾 SAVE</button>
+    <button class="clear" onclick="clearData()">CLEAR</button>
+    <button class="preview-btn" onclick="generateCard()">
+      ✨ PREVIEW & POST TO MESSENGER
+    </button>
+  </div>
 
-  <div id="status"
-       class="status"></div>
+  <div class="preview" id="preview">
 
-
-  <!-- PREVIEW -->
-  <section id="preview"
-           class="preview">
-
-    <div class="preview-head">
-
-      <div class="preview-title">
-        MINISTERS OF THE WEEK
-      </div>
-
-      <div id="previewDate"
-           class="preview-date">
-      </div>
-
+    <div class="preview-title">
+      📱 MESSENGER CARD
     </div>
 
-    <div id="previewBody"
-         class="preview-body">
-    </div>
+    <canvas id="cardPreview"></canvas>
 
     <div class="preview-actions">
-
-      <button class="edit"
-              onclick="editForm()">
-        EDIT
+      <button class="edit-btn" onclick="closePreview()">
+        ✏️ EDIT
       </button>
 
-      <button class="post"
-              onclick="postToMessenger()">
-        POST TO MESSENGER
+      <button class="post-btn" onclick="postToMessenger()">
+        💬 POST TO MESSENGER
       </button>
-
     </div>
 
-  </section>
-
+  </div>
 
   <div class="footer">
-    Serving is a privilege • All for the glory of God
+    Serve the Lord with gladness. — Psalm 100:2
   </div>
 
 </div>
 
+<div class="toast" id="toast"></div>
 
 <script>
 
 const fields = [
-
-  ["worshipLeader","Worship Leader"],
-
-  ["backup1","Back Up Singer 1"],
-  ["backup2","Back Up Singer 2"],
-  ["backup3","Back Up Singer 3"],
-
-  ["leadGuitar","Lead Guitar"],
-  ["bassGuitar","Bass Guitar"],
-  ["keyboard","Keyboard"],
-  ["drummer","Drummer"]
-
+  "weekDate",
+  "worshipLeader",
+  "backup1",
+  "backup2",
+  "backup3",
+  "leadGuitar",
+  "bassGuitar",
+  "keyboard",
+  "drummer"
 ];
 
-const STORAGE_KEY =
-  "ministers_of_the_week";
+const STORAGE_KEY = "ministers_of_the_week";
 
+/* ---------- DEFAULT DATE ---------- */
 
-/* =========================
-   TODAY
-========================= */
+document.getElementById("weekDate").value =
+  new Date().toISOString().split("T")[0];
 
-function setToday(){
-
-  const d = new Date();
-
-  const yyyy = d.getFullYear();
-
-  const mm =
-    String(d.getMonth()+1)
-      .padStart(2,"0");
-
-  const dd =
-    String(d.getDate())
-      .padStart(2,"0");
-
-  document.getElementById("weekDate").value =
-    `${yyyy}-${mm}-${dd}`;
-
-  updateDates();
-}
-
-
-/* =========================
-   LOAD
-========================= */
+/* ---------- LOAD ---------- */
 
 function loadData(){
 
-  const saved =
-    localStorage.getItem(STORAGE_KEY);
-
-  if(!saved) return;
-
   try{
 
-    const data =
-      JSON.parse(saved);
-
-    if(data.date){
-
-      document.getElementById("weekDate")
-        .value = data.date;
-
-    }
-
-    fields.forEach(([id])=>{
-
-      const el =
-        document.getElementById(id);
-
-      if(el && data[id] !== undefined){
-
-        el.value = data[id];
-
-      }
-
-    });
-
-    updateDates();
-
-  }catch(e){
-
-    console.log("Load error");
-
-  }
-}
-
-
-/* =========================
-   DATE DISPLAY
-========================= */
-
-function formatDate(value){
-
-  if(!value) return "This Week";
-
-  const parts =
-    value.split("-");
-
-  if(parts.length !== 3){
-    return value;
-  }
-
-  const date =
-    new Date(
-      Number(parts[0]),
-      Number(parts[1])-1,
-      Number(parts[2])
+    const saved = JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
     );
 
-  return date.toLocaleDateString(
-    "en-PH",
-    {
-      month:"long",
-      day:"numeric",
-      year:"numeric"
-    }
-  );
+    if(!saved) return;
+
+    fields.forEach(id=>{
+      const el=document.getElementById(id);
+
+      if(el && saved[id] !== undefined){
+        el.value=saved[id];
+      }
+    });
+
+  }catch(e){}
+
 }
 
+loadData();
 
-function updateDates(){
+/* ---------- SAVE ---------- */
 
-  const date =
-    document.getElementById("weekDate").value;
+function saveData(){
 
-  const formatted =
-    formatDate(date);
+  const data={};
 
-  document.getElementById("heroDate")
-    .textContent = formatted;
-
-  document.getElementById("previewDate")
-    .textContent = formatted;
-}
-
-
-/* =========================
-   SAVE
-========================= */
-
-function saveMinisters(){
-
-  const data = {
-
-    date:
-      document.getElementById("weekDate").value
-
-  };
-
-  fields.forEach(([id])=>{
-
-    data[id] =
-      document.getElementById(id)
-        .value.trim();
-
+  fields.forEach(id=>{
+    data[id]=document.getElementById(id).value.trim();
   });
 
   localStorage.setItem(
@@ -938,361 +638,576 @@ function saveMinisters(){
     JSON.stringify(data)
   );
 
-  showStatus(
-    "✓ Ministers saved successfully.",
-    "#dcfce7",
-    "#166534"
-  );
-
+  showToast("✓ Ministers saved");
 }
 
+/* ---------- CLEAR ---------- */
 
-/* =========================
-   PREVIEW
-========================= */
+function clearData(){
 
-function showPreview(){
+  if(!confirm("Clear all ministers?")) return;
 
-  updateDates();
+  fields.forEach(id=>{
 
-  let html = "";
-
-  fields.forEach(([id,label])=>{
-
-    const value =
-      document.getElementById(id)
-        .value.trim();
-
-    const display =
-      value || "VACANT";
-
-    const cls =
-      value ? "preview-name" :
-              "preview-name vacant";
-
-    html += `
-      <div class="preview-line">
-
-        <span class="preview-position">
-          ${label}
-        </span>
-
-        <span class="${cls}">
-          ${escapeHTML(display)}
-        </span>
-
-      </div>
-    `;
+    if(id==="weekDate"){
+      document.getElementById(id).value =
+        new Date().toISOString().split("T")[0];
+    }else{
+      document.getElementById(id).value="";
+    }
 
   });
 
-  document.getElementById("previewBody")
-    .innerHTML = html;
+  localStorage.removeItem(STORAGE_KEY);
 
-  document.getElementById("preview")
-    .style.display = "block";
+  closePreview();
 
-  setTimeout(()=>{
-
-    document.getElementById("preview")
-      .scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
-
-  },80);
-
+  showToast("Cleared");
 }
 
-
-/* =========================
-   EDIT
-========================= */
-
-function editForm(){
-
-  document.getElementById("preview")
-    .style.display = "none";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================
-   CLEAR
-========================= */
-
-function clearForm(){
-
-  if(!confirm(
-    "Clear all ministers?"
-  )){
-    return;
-  }
-
-  fields.forEach(([id])=>{
-
-    document.getElementById(id)
-      .value = "";
-
-  });
-
-  localStorage.removeItem(
-    STORAGE_KEY
-  );
-
-  document.getElementById("preview")
-    .style.display = "none";
-
-  showStatus(
-    "Form cleared.",
-    "#fee2e2",
-    "#991b1b"
-  );
-
-}
-
-
-/* =========================
-   MESSENGER POST
-========================= */
-
-function postToMessenger(){
-
-  const date =
-    formatDate(
-      document.getElementById("weekDate").value
-    );
-
-  let text =
-`✨ MINISTERS OF THE WEEK ✨
-
-📅 ${date}
-
-🙏 Let us serve together and glorify God!
-
-🎤 WORSHIP TEAM
-
-Worship Leader:
-${getValue("worshipLeader")}
-
-🎶 BACK UP SINGERS
-
-1. ${getValue("backup1")}
-2. ${getValue("backup2")}
-3. ${getValue("backup3")}
-
-🎸 INSTRUMENTALISTS
-
-Lead Guitar:
-${getValue("leadGuitar")}
-
-Bass Guitar:
-${getValue("bassGuitar")}
-
-Keyboard:
-${getValue("keyboard")}
-
-Drummer:
-${getValue("drummer")}
-
-✨ “Serve the Lord with gladness.” — Psalm 100:2
-
-See you in worship! 🙏
-`;
-
-  if(navigator.share){
-
-    navigator.share({
-      title:"Ministers of the Week",
-      text:text
-    })
-    .catch(()=>{
-
-      copyText(text);
-
-    });
-
-  }else{
-
-    copyText(text);
-
-  }
-
-}
-
-
-/* =========================
-   ALWAYS SHOW VACANT
-========================= */
+/* ---------- GET VALUE ---------- */
 
 function getValue(id){
 
   const value =
-    document.getElementById(id)
-      .value.trim();
+    document.getElementById(id).value.trim();
 
   return value || "VACANT";
-
 }
 
+/* ---------- FORMAT DATE ---------- */
 
-/* =========================
-   COPY
-========================= */
+function getFormattedDate(){
 
-function copyText(text){
+  const value =
+    document.getElementById("weekDate").value;
 
-  if(navigator.clipboard){
+  if(!value) return "MINISTERS OF THE WEEK";
 
-    navigator.clipboard
-      .writeText(text)
-      .then(()=>{
+  const d=new Date(value+"T00:00:00");
 
-        showStatus(
-          "✓ Copied! Paste it into Messenger.",
-          "#dbeafe",
-          "#1e40af"
-        );
+  return d.toLocaleDateString("en-US",{
+    month:"long",
+    day:"numeric",
+    year:"numeric"
+  });
+}
 
-      })
-      .catch(()=>{
+/* ---------- CANVAS HELPERS ---------- */
 
-        alert(text);
+function roundRect(ctx,x,y,w,h,r){
 
-      });
+  ctx.beginPath();
 
-  }else{
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
 
-    alert(text);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
 
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+
+  ctx.closePath();
+}
+
+function drawStar(ctx,x,y,size,alpha=1){
+
+  ctx.save();
+
+  ctx.translate(x,y);
+  ctx.globalAlpha=alpha;
+  ctx.fillStyle="#fde68a";
+
+  ctx.beginPath();
+
+  ctx.moveTo(0,-size);
+  ctx.lineTo(size*.22,-size*.22);
+  ctx.lineTo(size,0);
+  ctx.lineTo(size*.22,size*.22);
+  ctx.lineTo(0,size);
+  ctx.lineTo(-size*.22,size*.22);
+  ctx.lineTo(-size,0);
+  ctx.lineTo(-size*.22,-size*.22);
+  ctx.closePath();
+
+  ctx.fill();
+  ctx.restore();
+}
+
+function fitText(ctx,text,maxWidth,font){
+
+  ctx.font=font;
+
+  if(ctx.measureText(text).width<=maxWidth){
+    return text;
   }
 
+  let t=text;
+
+  while(
+    t.length>3 &&
+    ctx.measureText(t+"…").width>maxWidth
+  ){
+    t=t.slice(0,-1);
+  }
+
+  return t+"…";
 }
 
+/* ---------- GENERATE STATIC CARD ---------- */
 
-/* =========================
-   STATUS
-========================= */
+function generateCard(){
 
-function showStatus(
-  message,
-  bg,
-  color
-){
+  saveData();
 
-  const el =
-    document.getElementById("status");
+  const canvas=document.getElementById("cardPreview");
 
-  el.textContent = message;
+  const W=1080;
+  const H=1500;
 
-  el.style.background = bg;
-  el.style.color = color;
-  el.style.display = "block";
+  canvas.width=W;
+  canvas.height=H;
 
-  clearTimeout(
-    window.statusTimer
-  );
+  const ctx=canvas.getContext("2d");
 
-  window.statusTimer =
-    setTimeout(()=>{
+  /* BACKGROUND */
 
-      el.style.display = "none";
+  const bg=ctx.createLinearGradient(0,0,W,H);
 
-    },3500);
+  bg.addColorStop(0,"#06101d");
+  bg.addColorStop(.48,"#0b1f35");
+  bg.addColorStop(1,"#111827");
 
-}
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,W,H);
 
+  /* GLOW CIRCLES */
 
-/* =========================
-   HTML SAFETY
-========================= */
+  function glowCircle(x,y,r,color){
 
-function escapeHTML(str){
-
-  return String(str)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-   AUTO SAVE WHILE TYPING
-========================= */
-
-document
-  .querySelectorAll(".name-input")
-  .forEach(input=>{
-
-    input.addEventListener(
-      "input",
-      ()=>{
-
-        let data = {};
-
-        const saved =
-          localStorage.getItem(
-            STORAGE_KEY
-          );
-
-        try{
-
-          data =
-            saved
-              ? JSON.parse(saved)
-              : {};
-
-        }catch(e){
-
-          data = {};
-
-        }
-
-        data.date =
-          document.getElementById(
-            "weekDate"
-          ).value;
-
-        data[input.id] =
-          input.value;
-
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify(data)
-        );
-
-      }
+    const g=ctx.createRadialGradient(
+      x,y,0,
+      x,y,r
     );
 
-  });
+    g.addColorStop(0,color);
+    g.addColorStop(1,"rgba(0,0,0,0)");
 
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fill();
+  }
 
-/* DATE CHANGE */
-
-document
-  .getElementById("weekDate")
-  .addEventListener(
-    "change",
-    ()=>{
-
-      updateDates();
-
-    }
+  glowCircle(
+    100,100,350,
+    "rgba(14,165,233,.18)"
   );
 
+  glowCircle(
+    970,300,380,
+    "rgba(139,92,246,.16)"
+  );
 
-/* START */
+  glowCircle(
+    500,1400,420,
+    "rgba(16,185,129,.12)"
+  );
 
-setToday();
-loadData();
+  /* STATIC SPARKLES */
+
+  const stars=[
+    [70,120,13,.9],
+    [180,240,8,.65],
+    [960,120,14,.9],
+    [1000,390,8,.7],
+    [80,650,9,.65],
+    [1010,750,12,.8],
+    [70,1190,13,.7],
+    [990,1260,9,.8],
+    [500,80,6,.6],
+    [530,1420,8,.7]
+  ];
+
+  stars.forEach(s=>{
+    drawStar(ctx,s[0],s[1],s[2],s[3]);
+  });
+
+  /* TOP CHURCH NAME */
+
+  ctx.textAlign="center";
+
+  ctx.font="900 25px Arial";
+  ctx.fillStyle="#fcd34d";
+
+  ctx.fillText(
+    "BURGOS FAMILY BAPTIST CHURCH",
+    W/2,
+    82
+  );
+
+  /* MAIN TITLE */
+
+  ctx.font="1000 54px Arial";
+  ctx.fillStyle="#ffffff";
+
+  ctx.fillText(
+    "MINISTERS OF THE WEEK",
+    W/2,
+    145
+  );
+
+  ctx.font="500 23px Arial";
+  ctx.fillStyle="#cbd5e1";
+
+  ctx.fillText(
+    "Serving together • Worshipping together",
+    W/2,
+    183
+  );
+
+  /* DATE PILL */
+
+  const dateText=getFormattedDate();
+
+  roundRect(ctx,365,207,350,55,28);
+
+  const dateGrad=ctx.createLinearGradient(
+    365,207,715,262
+  );
+
+  dateGrad.addColorStop(0,"#f59e0b");
+  dateGrad.addColorStop(1,"#d97706");
+
+  ctx.fillStyle=dateGrad;
+  ctx.fill();
+
+  ctx.font="900 23px Arial";
+  ctx.fillStyle="#fff";
+
+  ctx.fillText(
+    dateText.toUpperCase(),
+    W/2,
+    243
+  );
+
+  /* CARD HELPERS */
+
+  let y=300;
+
+  function section(title,icon,color1,color2){
+
+    const h=62;
+
+    const grad=ctx.createLinearGradient(
+      50,y,1030,y
+    );
+
+    grad.addColorStop(0,color1);
+    grad.addColorStop(1,color2);
+
+    roundRect(ctx,50,y,980,h,18);
+
+    ctx.fillStyle=grad;
+    ctx.fill();
+
+    ctx.textAlign="left";
+    ctx.font="1000 26px Arial";
+    ctx.fillStyle="#fff";
+
+    ctx.fillText(
+      icon+"  "+title,
+      78,
+      y+40
+    );
+
+    y+=76;
+  }
+
+  function row(label,value){
+
+    const h=68;
+
+    roundRect(
+      ctx,
+      50,
+      y,
+      980,
+      h,
+      15
+    );
+
+    ctx.fillStyle="rgba(255,255,255,.075)";
+    ctx.fill();
+
+    ctx.textAlign="left";
+
+    ctx.font="800 22px Arial";
+    ctx.fillStyle="#dbeafe";
+
+    ctx.fillText(
+      label,
+      76,
+      y+42
+    );
+
+    ctx.textAlign="right";
+
+    const display=fitText(
+      ctx,
+      value,
+      460,
+      "900 24px Arial"
+    );
+
+    ctx.font="900 24px Arial";
+
+    ctx.fillStyle=
+      value==="VACANT"
+      ? "#fbbf24"
+      : "#ffffff";
+
+    ctx.fillText(
+      display,
+      1000,
+      y+42
+    );
+
+    y+=78;
+  }
+
+  /* WORSHIP */
+
+  section(
+    "WORSHIP TEAM",
+    "🎤",
+    "#075985",
+    "#0e7490"
+  );
+
+  row(
+    "Worship Leader",
+    getValue("worshipLeader")
+  );
+
+  y+=12;
+
+  /* BACKUP */
+
+  section(
+    "BACK UP SINGERS",
+    "🎶",
+    "#6d28d9",
+    "#7c3aed"
+  );
+
+  row("1.",getValue("backup1"));
+  row("2.",getValue("backup2"));
+  row("3.",getValue("backup3"));
+
+  y+=12;
+
+  /* INSTRUMENTS */
+
+  section(
+    "INSTRUMENTALISTS",
+    "🎸",
+    "#047857",
+    "#059669"
+  );
+
+  row(
+    "Lead Guitar",
+    getValue("leadGuitar")
+  );
+
+  row(
+    "Bass Guitar",
+    getValue("bassGuitar")
+  );
+
+  row(
+    "Keyboard",
+    getValue("keyboard")
+  );
+
+  row(
+    "Drummer",
+    getValue("drummer")
+  );
+
+  /* FOOTER */
+
+  y+=25;
+
+  ctx.textAlign="center";
+
+  ctx.font="italic 500 25px Georgia";
+  ctx.fillStyle="#e2e8f0";
+
+  ctx.fillText(
+    "“Serve the Lord with gladness.”",
+    W/2,
+    y
+  );
+
+  ctx.font="800 21px Arial";
+  ctx.fillStyle="#fcd34d";
+
+  ctx.fillText(
+    "Psalm 100:2",
+    W/2,
+    y+35
+  );
+
+  /* BORDER */
+
+  ctx.strokeStyle="rgba(252,211,77,.45)";
+  ctx.lineWidth=3;
+
+  roundRect(
+    ctx,
+    20,
+    20,
+    W-40,
+    H-40,
+    30
+  );
+
+  ctx.stroke();
+
+  /* SHOW PREVIEW */
+
+  document.getElementById("preview")
+    .classList.add("show");
+
+  document.getElementById("preview")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  showToast("✨ Card generated");
+}
+
+/* ---------- CLOSE PREVIEW ---------- */
+
+function closePreview(){
+
+  document.getElementById("preview")
+    .classList.remove("show");
+
+}
+
+/* ---------- POST TO MESSENGER ---------- */
+
+async function postToMessenger(){
+
+  const canvas=document.getElementById("cardPreview");
+
+  if(!canvas.width){
+    generateCard();
+  }
+
+  canvas.toBlob(async blob=>{
+
+    if(!blob){
+      showToast("Unable to create image");
+      return;
+    }
+
+    const file=new File(
+      [blob],
+      "ministers-of-the-week.png",
+      {type:"image/png"}
+    );
+
+    const shareData={
+      title:"Ministers of the Week",
+      text:"MINISTERS OF THE WEEK",
+      files:[file]
+    };
+
+    try{
+
+      /*
+       * Android will show the normal Share Sheet.
+       * Messenger can be selected there.
+       */
+
+      if(
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({files:[file]})
+      ){
+
+        await navigator.share(shareData);
+
+        showToast("✓ Ready to share");
+
+      }else{
+
+        /*
+         * Fallback for browsers that don't support
+         * sharing files.
+         */
+
+        const url=URL.createObjectURL(blob);
+
+        const a=document.createElement("a");
+
+        a.href=url;
+        a.download="ministers-of-the-week.png";
+
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        URL.revokeObjectURL(url);
+
+        showToast(
+          "Image saved — attach it in Messenger"
+        );
+      }
+
+    }catch(err){
+
+      /*
+       * User cancelled the Android share sheet.
+       * No error message needed.
+       */
+
+      if(err.name!=="AbortError"){
+        showToast("Sharing cancelled");
+      }
+
+    }
+
+  },"image/png");
+
+}
+
+/* ---------- TOAST ---------- */
+
+function showToast(message){
+
+  const toast=document.getElementById("toast");
+
+  toast.textContent=message;
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
+
+}
 
 </script>
 
