@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<title>Ministers of the Week</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f3f4f6;
+  color:#111827;
+}
+
+body{
+  padding-bottom:20px;
+}
+
+/* HEADER */
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:#111827;
+  color:white;
+  min-height:58px;
+  padding:7px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 7px rgba(0,0,0,.25);
+}
+
+.header-title{
+  text-align:center;
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+/* DATE */
+.date-row{
+  background:white;
+  padding:8px 10px;
+  border-bottom:1px solid #d1d5db;
+}
+
+.date-input{
+  width:100%;
+  height:40px;
+  border:1px solid #9ca3af;
+  border-radius:7px;
+  padding:0 10px;
+  font-size:16px;
+  font-weight:700;
+  background:#fff;
+}
+
+/* MAIN TABLE */
+.table-wrap{
+  padding:8px;
+}
+
+.minister-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  table-layout:fixed;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+
+.minister-table td{
+  border:1px solid #cbd5e1;
+}
+
+.position{
+  width:42%;
+  background:#e5e7eb;
+  font-size:15px;
+  font-weight:900;
+  padding:9px 7px;
+  vertical-align:middle;
+}
+
+.name-cell{
+  width:58%;
+  padding:3px;
+  background:#fff;
+}
+
+.name-input{
+  width:100%;
+  height:40px;
+  border:0;
+  outline:none;
+  background:transparent;
+  padding:0 7px;
+  font-size:16px;
+  font-weight:700;
+  color:#111827;
+}
+
+.name-input::placeholder{
+  color:#9ca3af;
+  font-weight:500;
+}
+
+.group-row td{
+  background:#111827;
+  color:white;
+  font-size:14px;
+  font-weight:900;
+  padding:7px 8px;
+  letter-spacing:.3px;
+}
+
+.number{
+  display:inline-block;
+  width:22px;
+  font-weight:900;
+}
+
+/* BUTTONS */
+.actions{
+  padding:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+button{
+  border:0;
+  border-radius:7px;
+  min-height:45px;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn-save{
+  background:#15803d;
+  color:white;
+}
+
+.btn-clear{
+  background:#dc2626;
+  color:white;
+}
+
+.btn-preview{
+  grid-column:1 / -1;
+  background:#2563eb;
+  color:white;
+}
+
+/* PREVIEW */
+.preview{
+  display:none;
+  margin:8px;
+  background:white;
+  border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+
+.preview-head{
+  background:#111827;
+  color:white;
+  padding:10px;
+  text-align:center;
+}
+
+.preview-title{
+  font-size:18px;
+  font-weight:900;
+}
+
+.preview-date{
+  font-size:13px;
+  margin-top:3px;
+  opacity:.9;
+}
+
+.preview-body{
+  padding:10px;
+}
+
+.preview-line{
+  padding:7px 3px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:15px;
+}
+
+.preview-position{
+  font-weight:900;
+}
+
+.preview-name{
+  margin-left:5px;
+}
+
+.preview-actions{
+  padding:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.btn-edit{
+  background:#6b7280;
+  color:white;
+}
+
+.btn-post{
+  background:#1877f2;
+  color:white;
+}
+
+/* SAVED MESSAGE */
+.status{
+  margin:8px;
+  padding:9px;
+  border-radius:7px;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+  display:none;
+}
+
+/* SMALL DEVICES */
+@media(max-width:360px){
+  .position{
+    font-size:13px;
+  }
+
+  .name-input{
+    font-size:14px;
+  }
+
+  .header-title{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="header-title">MINISTERS OF THE WEEK</div>
+</header>
+
+<div class="date-row">
+  <input id="weekDate"
+         class="date-input"
+         type="date">
+</div>
+
+<div class="table-wrap">
+
+<table class="minister-table">
+
+  <tr class="group-row">
+    <td colspan="2">WORSHIP TEAM</td>
+  </tr>
+
+  <tr>
+    <td class="position">Worship Leader</td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="worshipLeader"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr class="group-row">
+    <td colspan="2">BACK UP SINGERS</td>
+  </tr>
+
+  <tr>
+    <td class="position">
+      <span class="number">1.</span>
+    </td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="backup1"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr>
+    <td class="position">
+      <span class="number">2.</span>
+    </td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="backup2"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr>
+    <td class="position">
+      <span class="number">3.</span>
+    </td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="backup3"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr class="group-row">
+    <td colspan="2">INSTRUMENTALISTS</td>
+  </tr>
+
+  <tr>
+    <td class="position">Lead Guitar</td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="leadGuitar"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr>
+    <td class="position">Bass Guitar</td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="bassGuitar"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr>
+    <td class="position">Keyboard</td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="keyboard"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+  <tr>
+    <td class="position">Drummer</td>
+    <td class="name-cell">
+      <input class="name-input"
+             id="drummer"
+             placeholder="Enter name"
+             autocomplete="off">
+    </td>
+  </tr>
+
+</table>
+
+</div>
+
+<div class="actions">
+  <button class="btn-save" onclick="saveMinisters()">
+    SAVE &amp; POST
+  </button>
+
+  <button class="btn-clear" onclick="clearForm()">
+    CLEAR
+  </button>
+
+  <button class="btn-preview" onclick="showPreview()">
+    PREVIEW
+  </button>
+</div>
+
+<div id="status" class="status"></div>
+
+<div id="preview" class="preview">
+
+  <div class="preview-head">
+    <div class="preview-title">
+      MINISTERS OF THE WEEK
+    </div>
+
+    <div id="previewDate" class="preview-date"></div>
+  </div>
+
+  <div id="previewBody" class="preview-body"></div>
+
+  <div class="preview-actions">
+    <button class="btn-edit" onclick="editForm()">
+      EDIT
+    </button>
+
+    <button class="btn-post" onclick="postToMessenger()">
+      POST
+    </button>
+  </div>
+
+</div>
+
+<script>
+const fields = [
+  ["worshipLeader","Worship Leader"],
+  ["backup1","Back Up Singer 1"],
+  ["backup2","Back Up Singer 2"],
+  ["backup3","Back Up Singer 3"],
+  ["leadGuitar","Lead Guitar"],
+  ["bassGuitar","Bass Guitar"],
+  ["keyboard","Keyboard"],
+  ["drummer","Drummer"]
+];
+
+const STORAGE_KEY = "ministers_of_the_week";
+
+/* TODAY */
+function setToday(){
+  const d = new Date();
+
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,"0");
+  const dd = String(d.getDate()).padStart(2,"0");
+
+  document.getElementById("weekDate").value =
+    `${yyyy}-${mm}-${dd}`;
+}
+
+/* LOAD */
+function loadData(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+
+  if(!saved) return;
+
+  try{
+    const data = JSON.parse(saved);
+
+    if(data.date){
+      document.getElementById("weekDate").value = data.date;
+    }
+
+    fields.forEach(([id])=>{
+      const el = document.getElementById(id);
+
+      if(el && data[id] !== undefined){
+        el.value = data[id];
+      }
+    });
+
+  }catch(e){
+    console.log("Unable to load saved data");
+  }
+}
+
+/* SAVE */
+function saveMinisters(){
+
+  const data = {
+    date: document.getElementById("weekDate").value
+  };
+
+  fields.forEach(([id])=>{
+    data[id] = document.getElementById(id).value.trim();
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+  showPreview();
+
+  showStatus(
+    "Saved successfully. Ready to post.",
+    "#dcfce7",
+    "#166534"
+  );
+}
+
+/* PREVIEW */
+function showPreview(){
+
+  const date =
+    document.getElementById("weekDate").value;
+
+  document.getElementById("previewDate").textContent =
+    formatDate(date);
+
+  let html = "";
+
+  fields.forEach(([id,label])=>{
+
+    const value =
+      document.getElementById(id).value.trim();
+
+    if(value){
+      html += `
+        <div class="preview-line">
+          <span class="preview-position">${label}:</span>
+          <span class="preview-name">${escapeHTML(value)}</span>
+        </div>
+      `;
+    }
+
+  });
+
+  if(!html){
+    html = `
+      <div class="preview-line"
+           style="text-align:center;color:#6b7280;">
+        No ministers entered yet.
+      </div>
+    `;
+  }
+
+  document.getElementById("previewBody").innerHTML = html;
+
+  document.getElementById("preview").style.display = "block";
+
+  setTimeout(()=>{
+    document.getElementById("preview")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+  },50);
+}
+
+/* EDIT */
+function editForm(){
+  document.getElementById("preview").style.display = "none";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+/* CLEAR */
+function clearForm(){
+
+  if(!confirm("Clear all ministers?")){
+    return;
+  }
+
+  fields.forEach(([id])=>{
+    document.getElementById(id).value = "";
+  });
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  document.getElementById("preview").style.display = "none";
+
+  showStatus(
+    "Form cleared.",
+    "#fee2e2",
+    "#991b1b"
+  );
+}
+
+/* POST */
+function postToMessenger(){
+
+  let text =
+`MINISTERS OF THE WEEK
+${formatDate(document.getElementById("weekDate").value)}
+
+`;
+
+  fields.forEach(([id,label])=>{
+
+    const value =
+      document.getElementById(id).value.trim();
+
+    if(value){
+      text += `${label}: ${value}\n`;
+    }
+
+  });
+
+  /*
+    Web Share API:
+    On supported Android devices,
+    this opens the system share sheet.
+    Messenger can then be selected.
+  */
+
+  if(navigator.share){
+
+    navigator.share({
+      title:"Ministers of the Week",
+      text:text
+    }).catch(()=>{
+      copyText(text);
+    });
+
+  }else{
+
+    copyText(text);
+
+  }
+}
+
+/* COPY FALLBACK */
+function copyText(text){
+
+  navigator.clipboard.writeText(text)
+    .then(()=>{
+      showStatus(
+        "Copied! Paste it into Messenger.",
+        "#dbeafe",
+        "#1e40af"
+      );
+    })
+    .catch(()=>{
+      alert(text);
+    });
+
+}
+
+/* DATE FORMAT */
+function formatDate(value){
+
+  if(!value) return "";
+
+  const parts = value.split("-");
+
+  if(parts.length !== 3){
+    return value;
+  }
+
+  const date =
+    new Date(
+      Number(parts[0]),
+      Number(parts[1])-1,
+      Number(parts[2])
+    );
+
+  return date.toLocaleDateString(
+    "en-PH",
+    {
+      month:"long",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+}
+
+/* STATUS */
+function showStatus(message,bg,color){
+
+  const el =
+    document.getElementById("status");
+
+  el.textContent = message;
+  el.style.background = bg;
+  el.style.color = color;
+  el.style.display = "block";
+
+  clearTimeout(window.statusTimer);
+
+  window.statusTimer =
+    setTimeout(()=>{
+      el.style.display = "none";
+    },3000);
+}
+
+/* HTML SAFETY */
+function escapeHTML(str){
+
+  return str
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+/* SAVE WHILE TYPING */
+document.querySelectorAll(".name-input")
+.forEach(input=>{
+
+  input.addEventListener("input",()=>{
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
+
+    let data = {};
+
+    try{
+      data = saved ? JSON.parse(saved) : {};
+    }catch(e){}
+
+    data.date =
+      document.getElementById("weekDate").value;
+
+    data[input.id] =
+      input.value;
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+  });
+
+});
+
+/* START */
+setToday();
+loadData();
+</script>
+
+</body>
+</html>
